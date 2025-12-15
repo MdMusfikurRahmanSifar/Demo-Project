@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+  namespace: default          # <-- added
+  labels:
+    app: flask-hello
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-hello
+  template:
+    metadata:
+      labels:
+        app: flask-hello
+    spec:
+      containers:
+      - name: flask
+        image: mdmusfikurrahmansifar/hello-world:2025-12-11-191633
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-service
+  namespace: default          # <-- added
+  labels:
+    app: flask-hello
+    release: prometheus
+spec:
+  selector:
+    app: flask-hello
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: ClusterIP
