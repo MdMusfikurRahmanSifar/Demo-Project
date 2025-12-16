@@ -10,7 +10,7 @@ def hello():
 
 @app.route("/new")
 def new():
-    return "I am running my first ci pipeline!"            
+    return "FINAL CHECK"            
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
