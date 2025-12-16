@@ -1,37 +1,47 @@
+#######DEPLOYMENT.YAML#########
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-world
   namespace: default          # <-- added
   labels:
-    app: flask-hello
+    app: hello-world
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: flask-hello
+      app: hello-world
   template:
     metadata:
       labels:
-        app: flask-hello
+        app: hello-world
     spec:
       containers:
       - name: flask
         image: mdmusfikurrahmansifar/hello-world:2025-12-11-191633
+
         ports:
         - containerPort: 5000
+
+
+
+
 ---
+
+
+
+##########SERVICE.YAML#########
 apiVersion: v1
 kind: Service
 metadata:
   name: hello-world-service
   namespace: default          # <-- added
   labels:
-    app: flask-hello
+    app: hello-world
     release: prometheus
 spec:
   selector:
-    app: flask-hello
+    app: hello-world
   ports:
     - name: http
       protocol: TCP
