@@ -4,6 +4,8 @@
 # State files (contain sensitive data)
 terraform.tfstate
 terraform.tfstate.backup
+.terraform.*
+terraform.*
 
 # Lock file (optional: commit if you want reproducible provider versions)
 .terraform.lock.hcl
